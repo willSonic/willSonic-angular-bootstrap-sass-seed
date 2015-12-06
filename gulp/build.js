@@ -32,7 +32,7 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var htmlFilter = $.filter('*.html');
+    var htmlFilter = $.filter('**/*.html');
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
     var assets;
