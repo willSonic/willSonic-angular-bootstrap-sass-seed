@@ -37,7 +37,7 @@
    *
    */
   angular
-      .module('wsSeed.userMod')
+      .module('wsSeed.userModule')
       .factory('UserStateModel', UserStateModel);
 
   UserStateModel.$inject = [];

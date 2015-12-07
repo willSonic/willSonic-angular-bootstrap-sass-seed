@@ -13,7 +13,7 @@ angular.module('wsSeed.btNavBar_directive', [])
     }
 
     vm.isAuthenticated = function(){
-
+         return false;
     }
    }
 ])

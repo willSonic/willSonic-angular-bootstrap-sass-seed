@@ -9,7 +9,7 @@
    * Interface to login a registered user
    */
   angular
-      .module('wsSeed.userMod')
+      .module('wsSeed.userModule')
       .controller('LoginCtrl', LoginCtrl);
 
   LoginCtrl.$inject = ['$scope','$window','$location','$rootScope', '$auth'];

@@ -8,13 +8,14 @@
 
   angular.module('wsSeed', [
     'ngRoute',
+    'ui.bootstrap',
     'wsSeed.view1',
     'wsSeed.view2',
     'wsSeed.version',
     'satellizer',
     'wsSeed.coreModule',
-    'wsSeed.navBarMod',
-    'wsSeed.userMod'
+    'wsSeed.navbarModule',
+    'wsSeed.userModule'
   ]);
 
 })();

@@ -6,6 +6,7 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
+var naturalSort = require('gulp-natural-sort');
 module.exports = function(options) {
   gulp.task('inject', ['scripts', 'styles'], function () {
     var injectStyles = gulp.src([
@@ -13,11 +14,11 @@ module.exports = function(options) {
     ], { read: false });
 
     var injectScripts = gulp.src([
-      options.src + '/app/**/*.js',
+          options.src + '/app/**/*.js',
       '!' + options.src + '/app/**/*_test.js',
       '!' + options.src + '/app/**/*.spec.js',
       '!' + options.src + '/app/**/*.mock.js'
-    ])
+    ]).pipe(naturalSort())
     .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
     var injectOptions = {

@@ -9,7 +9,7 @@
    * Logs the user out of the site
   */
   angular
-      .module('wsSeed.userMod')
+      .module('wsSeed.userModule')
       .controller('LogoutCtrl', LogoutCtrl);
 
   LogoutCtrl.$inject = ['$auth','$window','$rootScope'];
