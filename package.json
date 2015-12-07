@@ -6,6 +6,17 @@
     "test": "gulp test"
   },
   "devDependencies": {
+    "async": "^1.5.0",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.14.1",
+    "colors": "^1.1.2",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "jwt-simple": "^0.3.1",
+    "moment": "^2.10.6",
+    "morgan": "^1.6.1",
+    "request": "^2.65.0",
+
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "~2.3.1",
     "gulp-angular-templatecache": "~1.5.0",

@@ -1,0 +1,70 @@
+
+(function() {
+  'use strict';
+
+  /* jshint latedef: nofunc */
+  /** @ngdoc service
+   * @name app.core.service:PubSub
+   *
+   * @propertyOf app.core
+   * @requires
+   * $rootScope
+   *
+   * @description
+   * Service for app wide event notification.
+   *
+   *
+   * data{
+   *    type:'name of notification',
+   *    value:{}
+   * }
+   *
+   *
+   ?*
+   *  use Example
+   *  $scope.notifications
+   *
+     $scope.notify = function() {
+      NotifyingService.publish( {
+                                     type:notifyTypes().AUTH_STATE
+                                     data:{loggedIn:false};
+                                });
+      };
+   *
+   * NotificationPubSub.subscribe($scope, function pubEvent() {
+   *     $scope.notifications++;
+   *});
+   *
+   *
+   */
+
+  angular
+      .module('wsSeed.coreModule')
+      .service('PubSub', PubSub);
+
+  PubSub.$inject = ['$rootScope'];
+
+  function PubSub($rootScope) {
+
+    return {
+        notifyTypes: function(){
+            return {
+                AUTH_STATE:'auth_state',
+                SOCIAL_REG_STATE:'social_reg_state',
+                SUSPEND_AUTH:'suspend_auth',
+                AUTH_REQUEST:'auth_request'
+            }
+        },
+        subscribe: function(scope, callback) {
+            var handler = $rootScope.$on('notifying-service-event', callback);
+            scope.$on('$destroy', handler);
+        },
+
+        publish: function(notifyData) {
+            $rootScope.$emit('notifying-service-event', notifyData);
+        }
+    };
+  }
+
+
+})();
