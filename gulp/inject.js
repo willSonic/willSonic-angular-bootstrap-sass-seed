@@ -18,7 +18,8 @@ module.exports = function(options) {
       '!' + options.src + '/app/**/*_test.js',
       '!' + options.src + '/app/**/*.spec.js',
       '!' + options.src + '/app/**/*.mock.js'
-    ]).pipe(naturalSort())
+    ])
+    .pipe(naturalSort('desc'))
     .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
     var injectOptions = {

@@ -13,7 +13,7 @@
     'wsSeed.view2',
     'wsSeed.version',
     'satellizer',
-    'wsSeed.coreModule',
+    'wsSeed.app.core.module',
     'wsSeed.navbarModule',
     'wsSeed.userModule'
   ]);

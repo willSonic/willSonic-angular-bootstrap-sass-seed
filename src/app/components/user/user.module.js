@@ -1,5 +1,8 @@
-'user strict'
+(function () {
+    'user strict'
 
-angular.module('wsSeed.userModule', ['ngRoute']);
+     angular.module('wsSeed.userModule', ['ngRoute']);
+
+}());
 
 

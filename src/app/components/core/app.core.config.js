@@ -1,0 +1,35 @@
+
+(function () {
+  'use strict';
+  /**
+   * @ngdoc object
+   * @name app.account:cfgAccountRoute
+   *
+   * @requires ($stateProvider)
+   * @propertyOf app.account
+   *
+   * @description
+   * State definitions and configuration for the account module
+   */
+
+  angular.module('wsSeed.app.core.module', ['ngRoute'])
+  .config(cfg);
+  cfg.$inject = ['$routeProvider', '$authProvider', '$httpProvider'];
+
+  function cfg($routeProvider, $authProvider,  $httpProvider) {
+
+         $routeProvider.otherwise("/");
+
+          $httpProvider.interceptors.push(function() {
+                return{
+                        'request': function(config) {
+                            return config;
+                        }
+                }
+          });
+
+        $authProvider.httpInterceptor = true;
+
+  }
+
+})();

@@ -1,36 +1,58 @@
 
+(function(){
 'user strict'
 
+angular.module('wsSeed.navbarModule')
+.directive('btNavBar', btNavBar);
 
-angular.module('wsSeed.btNavBar_directive', [])
+function btNavBar(){
+    var directive = {
+            restrict: 'EA',
+            templateUrl:"app/components/navbar/navbar.html",
+            scope: {
+              loggedIn: '='
+            },
+            link: linkFunc,
+            controller: NavBarCtrl,
+            controllerAs:'vm',
+            bindToController: true // because the scope is isolated
 
-.controller('NavBarCtrl',['$log', function($log){
+    }
+
+    return directive;
+
+    function linkFunc(scope, el, attr, ctrl) {
+          scope.loggedIn = false;
+    }
+ };
+
+
+NavBarCtrl.$inject = ['$scope','$log', 'PubSub'];
+
+function NavBarCtrl($scope, $log, PubSub) {
     var vm = this;
-    var previousClick = null;
+    vm.authenticated = false;
+
+    function sendNotification(){
+        PubSub.publish({
+               type:PubSub.notifyTypes().AUTH_REQUEST, data:null
+         });
+     }
 
     vm.linkSelected = function(){
-        $log.console("[NavBarCtrl]")
+        $log.console("[NavBarCtrl]");
     }
 
     vm.isAuthenticated = function(){
          return false;
     }
-   }
-])
 
-.directive('btNavBar', function(){
+    vm.loginBtnClicked = function(){
+       $log.debug("[NavBarCtrl] -- calling sendNotification")
+       if(!vm.authenticated){
+          sendNotification();
+       }
+    }
+}
 
-        return {
-            restrict: 'A',
-            scope: {
-              loggedIn: '='
-            },
-            templateUrl:"app/components/navbar/navbar.html",
-            transclude:true,
-            controllerAs: 'NavBarCtrl',
-
-            link: function (scope) {
-              scope.loggedIn.value = 'newValue';
-            }
-        }
- });
+}());

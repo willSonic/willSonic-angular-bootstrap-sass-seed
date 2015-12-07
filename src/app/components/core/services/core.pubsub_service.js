@@ -39,7 +39,7 @@
    */
 
   angular
-      .module('wsSeed.coreModule')
+      .module('wsSeed.app.core.module')
       .service('PubSub', PubSub);
 
   PubSub.$inject = ['$rootScope'];

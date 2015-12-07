@@ -14,27 +14,7 @@
 
   angular
      .module('wsSeed')
-     .config(cfg)
      .run(runAuth);
-
-  cfg.$inject = ['$routeProvider', '$authProvider', '$httpProvider'];
-
-  function cfg($routeProvider, $authProvider,  $httpProvider) {
-
-         $routeProvider.otherwise("/");
-
-          $httpProvider.interceptors.push(function() {
-                return{
-                        'request': function(config) {
-                            return config;
-                        }
-                }
-          });
-
-        $authProvider.httpInterceptor = true;
-
-  }
-
 
   function runAuth($rootScope, $window, $auth, UserRemoting, UserStateModel, $log){
 

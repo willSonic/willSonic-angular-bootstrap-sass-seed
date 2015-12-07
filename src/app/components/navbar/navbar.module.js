@@ -1,3 +1,4 @@
-'user strict'
-
-angular.module('wsSeed.navbarModule', ['wsSeed.btNavBar_directive']);
+(function(){
+    'user strict'
+    angular.module('wsSeed.navbarModule', []);
+}());

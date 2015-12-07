@@ -12,7 +12,7 @@
    * State definitions and configuration for the account module
    */
 
-  angular.module('wsSeed.coreModule', ['ngRoute'])
+  angular.module('wsSeed.user.module', ['ngRoute'])
   .constant( "routeStates", {
         loginState: {
           name: 'login',
@@ -37,5 +37,6 @@
     $routeProvider.when(routeStates.loginState.url, routeStates.loginState)
                   .when(routeStates.logoutState.url,routeStates.logoutState);
   }
+
 
 })();

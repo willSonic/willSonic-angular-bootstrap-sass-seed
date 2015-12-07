@@ -1,20 +1,35 @@
 
 <nav class="navbar navbar-default">
   <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">WillSonic Angular Seed</a>
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand" href="/">WS Angular Seed</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="#/view1" ng-click="linkSelected()"><i class="fa fa-shield"></i> View 1</a></li>
         <li><a href="#/view2" ng-click="linkSelected()"><i class="fa fa-comment"></i> View 2</a></li>
-        <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
+        <li  ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
         <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
-          <li><a href="/#/login">Login</a></li>
+              <!--<li><a href="#/login">Login</a></li>-->
+             <li><a href="#"  ng-click="vm.loginBtnClicked()">Login </a>
         </ul>
         <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-          <li><a href="/#/logout">Logout</a></li>
+             <!--<li><a href="#/logout">Logout</a></li>>-->
+             <li><a href="#"  ng-click="vm.loginBtnClicked()">Logout </a>
         </ul>
       </ul>
   </div>
 </nav>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+         <ng-include src="app/components/user/login/userlogin.html"></ng-include>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

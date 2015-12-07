@@ -10,6 +10,6 @@
    * The `wsSeed` module
    */
 
-   angular.module('wsSeed.coreModule', []);
+   angular.module('wsSeed.app.core.module', []);
 
 }());

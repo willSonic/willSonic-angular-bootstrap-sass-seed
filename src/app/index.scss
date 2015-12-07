@@ -102,13 +102,11 @@ ul {
 }
 
 .navbar-default .navbar-brand {
-  color: #333;
-  background-color: #ffe939;
+  color: $brand-primary;
 }
 
 .navbar-default .navbar-brand:hover {
-  color: #ffe939;
-  background-color: #333;
+  color: $brand-info;
 }
 
 .navbar-brand {
