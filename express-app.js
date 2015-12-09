@@ -18,7 +18,6 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');
 
-var config = require('./config');
 
 var TOKEN_SECRET = 'bujoubantu';
 
@@ -33,7 +32,7 @@ var user = {
 
 
 function comparePassword(password, done) {
-    bcrypt.compare(password, userSchema.password, function(err, isMatch) {
+    bcrypt.compare(password, user.password, function(err, isMatch) {
         done(err, isMatch);
     });
 };
@@ -41,7 +40,7 @@ function comparePassword(password, done) {
 
 var app = express();
 
-app.set('port', 3000);
+app.set('port', 5000);
 app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -121,7 +120,7 @@ app.put('/api/me', ensureAuthenticated, function(req, res) {
  |--------------------------------------------------------------------------
  */
 app.post('/auth/login', function(req, res) {
-       if(req.user.email != user.email || req.user.email.password != user.password ) {
+       if(req.body.email != user.email) {
             return res.status(401).send({ message: 'Invalid email and/or password' });
         }
         comparePassword(req.body.password, function(err, isMatch) {

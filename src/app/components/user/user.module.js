@@ -1,7 +1,7 @@
 (function () {
-    'user strict'
+    'use strict';
 
-     angular.module('wsSeed.userModule', ['ngRoute']);
+     angular.module('wsSeed.user.module', ['ngRoute']);
 
 }());
 

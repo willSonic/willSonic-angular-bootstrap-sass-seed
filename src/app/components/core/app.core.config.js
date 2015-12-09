@@ -12,20 +12,22 @@
    * State definitions and configuration for the account module
    */
 
-  angular.module('wsSeed.app.core.module', ['ngRoute'])
-  .config(cfg);
-  cfg.$inject = ['$routeProvider', '$authProvider', '$httpProvider'];
+  angular
+  .module('wsSeed.app.core.module', ['ngRoute'])
+  .config(appCoreConfig);
 
-  function cfg($routeProvider, $authProvider,  $httpProvider) {
+   appCoreConfig.$inject = ['$routeProvider', '$authProvider', '$httpProvider'];
 
-         $routeProvider.otherwise("/");
+   function appCoreConfig($routeProvider, $authProvider,  $httpProvider) {
 
-          $httpProvider.interceptors.push(function() {
-                return{
-                        'request': function(config) {
-                            return config;
-                        }
-                }
+         $routeProvider.otherwise('/');
+
+         $httpProvider.interceptors.push(function() {
+                return {
+                            'request': function(config) {
+                                return config;
+                            }
+                       };
           });
 
         $authProvider.httpInterceptor = true;

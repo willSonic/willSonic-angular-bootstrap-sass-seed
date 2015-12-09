@@ -4,15 +4,23 @@ var gulp            = require('gulp');
 var browserSync     = require('browser-sync');
 var browserSyncSpa  = require('browser-sync-spa');
 var nodemon         = require('gulp-nodemon');
+var proxyMiddleware = require('http-proxy-middleware');
+var url             = require('url');
 
 var middleware = require('./proxy');
 
 var util = require('util');
 
-var TOKEN_SECRET = 'bujoubantu';
-
+var proxy = proxyMiddleware(['/auth', '/api'], {target: 'http://localhost:5000'});
 
 module.exports = function(options) {
+
+
+  function hasContext( uri) {
+      var urlPath = url.parse(uri).path;
+      return urlPath.indexOf(contextApi) >=0 || urlPath.indexOf(contextAuth);
+  };
+
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -23,29 +31,24 @@ module.exports = function(options) {
         '/bower_components': 'bower_components'
       };
     }
-
     var server = {
       baseDir: baseDir,
-      routes: routes
+      routes: routes,
+      proxy: "localhost:3000",  // local node app address
+      port: 5000,
+      notify: true,
+      middleware:[proxy]
     };
 
 
-    if(middleware.length > 0) {
-      server.middleware = middleware;
-    }
-
-
-    function comparePassword(password, done) {
-      bcrypt.compare(password, this.password, function(err, isMatch) {
-        done(err, isMatch);
-      });
-    };
-
+    //if(middleware.length > 0) {
+     // server.middleware = middleware;
+    //}
 
     browserSync.instance = browserSync.init({
       startPath: '/',
       server: server,
-      browser: browser
+      browser: 'firefox'
     });
   }
 
@@ -54,8 +57,48 @@ module.exports = function(options) {
     selector: '[ng-app]'// Only needed for angular apps
   }));
 
+  gulp.task('nodemon', function (cb) {
+    var called = false;
+    nodemon({
+      script: 'express-app.js',
+      ignore: [
+        'gulpfile.js',
+        'node_modules/'
+      ]
+    })
+    .on('start', function () {
+      if (!called) {
+        called = true;
+        cb();
+      }
+    })
+    .on('restart', function () {
+      setTimeout(function () {
+        browserSync.reload();
+      }, 1000);
+    });
+  });
 
   gulp.task('serve', ['watch'], function () {
+    var called = false;
+    nodemon({
+      script: 'express-app.js',
+      ignore: [
+        'gulpfile.js',
+        'node_modules/'
+      ]
+    })
+    .on('start', function () {
+      if (!called) {
+        called = true;
+        cb();
+      }
+    })
+    .on('restart', function () {
+      setTimeout(function () {
+        browserSync.reload();
+      }, 1000);
+    });
     browserSyncInit([options.tmp + '/serve', options.src]);
   });
 

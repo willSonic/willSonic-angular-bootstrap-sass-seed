@@ -37,7 +37,7 @@
    *
    */
   angular
-      .module('wsSeed.userModule')
+      .module('wsSeed.user.module')
       .factory('UserStateModel', UserStateModel);
 
   UserStateModel.$inject = [];
@@ -57,6 +57,6 @@
 
     };
 
-  };
+  }
 
 })();

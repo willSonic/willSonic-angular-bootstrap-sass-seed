@@ -49,11 +49,9 @@
     return {
         notifyTypes: function(){
             return {
-                AUTH_STATE:'auth_state',
-                SOCIAL_REG_STATE:'social_reg_state',
-                SUSPEND_AUTH:'suspend_auth',
+                //data: 'reqLogin' or 'reqLogout'
                 AUTH_REQUEST:'auth_request'
-            }
+            };
         },
         subscribe: function(scope, callback) {
             var handler = $rootScope.$on('notifying-service-event', callback);

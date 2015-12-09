@@ -1,9 +1,8 @@
 (function() {
   'use strict';
-// Declare app level module which depends on views, and components
-
-   angular.element(document).ready(function() {
-    angular.bootstrap(document, ['wsSeed']);
+   // Declare app level module which depends on views, and components
+  angular.element(document).ready(function() {
+       angular.bootstrap(document, ['wsSeed']);
   });
 
   angular.module('wsSeed', [
@@ -14,8 +13,7 @@
     'wsSeed.version',
     'satellizer',
     'wsSeed.app.core.module',
-    'wsSeed.navbarModule',
-    'wsSeed.userModule'
+    'wsSeed.navbar.module',
+    'wsSeed.user.module'
   ]);
-
 })();

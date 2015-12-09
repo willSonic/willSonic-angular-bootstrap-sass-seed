@@ -9,33 +9,42 @@
    * Interface to login a registered user
    */
   angular
-      .module('wsSeed.userModule')
+      .module('wsSeed.user.module')
       .controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope','$window','$location','$rootScope', '$auth'];
+  LoginCtrl.$inject = ['$uibModalInstance', '$auth'];
   /* @ngInject */
-  function LoginCtrl($scope, $window, $location, $rootScope, $auth) {
+  function LoginCtrl($uibModalInstance, $auth) {
 
     var vm = this;
-    $scope.login = function() {
+    vm.modalInstance = $uibModalInstance;
+    vm.login = function() {
       $auth.login({
-        email: $scope.email,
-        password: $scope.password
+        email: vm.email,
+        password: vm.password
       })
-      .catch(function(response) {
-          console.log(response.data);
-        });
+      .then(function() {
+          vm.modalInstance.close();
+      })
+      .catch(function() {
+          vm.modalInstance.close();
+       });
     };
 
-    $scope.authenticate = function(provider) {
+
+   /*
+    *
+    * Used with third party authentications like twitter, google+, facebook, etc.
+    vm.authenticate = function(provider) {
       $auth.authenticate(provider)
           .then(function(response) {
              $window.localStorage.currentUser = JSON.stringify(response.data.user);
              $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
           })
         .catch(function(response) {
-          console.log(response);
+              console.log(response);
         });
     };
+    */
   }
 })();

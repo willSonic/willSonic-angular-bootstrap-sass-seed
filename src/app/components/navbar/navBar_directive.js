@@ -1,58 +1,58 @@
-
 (function(){
-'user strict'
+   'use strict';
 
-angular.module('wsSeed.navbarModule')
-.directive('btNavBar', btNavBar);
+   angular
+    .module('wsSeed.navbar.module')
+    .directive('bootstrapNavBar', bootstrapNavBar);
 
-function btNavBar(){
-    var directive = {
-            restrict: 'EA',
-            templateUrl:"app/components/navbar/navbar.html",
-            scope: {
-              loggedIn: '='
-            },
-            link: linkFunc,
-            controller: NavBarCtrl,
-            controllerAs:'vm',
-            bindToController: true // because the scope is isolated
+     function bootstrapNavBar(){
+            var directive = {
+                    restrict: 'EA',
+                    templateUrl:'app/components/navbar/navbar.html',
+                    scope: {},
+                    controller: NavBarCtrl,
+                    controllerAs:'vm'
+                    /**
+                     * if the scope is isolated
+                     * bindToController: true
+                     * */
+            };
 
-    }
-
-    return directive;
-
-    function linkFunc(scope, el, attr, ctrl) {
-          scope.loggedIn = false;
-    }
- };
-
-
-NavBarCtrl.$inject = ['$scope','$log', 'PubSub'];
-
-function NavBarCtrl($scope, $log, PubSub) {
-    var vm = this;
-    vm.authenticated = false;
-
-    function sendNotification(){
-        PubSub.publish({
-               type:PubSub.notifyTypes().AUTH_REQUEST, data:null
-         });
+            return directive;
      }
 
-    vm.linkSelected = function(){
-        $log.console("[NavBarCtrl]");
-    }
 
-    vm.isAuthenticated = function(){
-         return false;
-    }
+     NavBarCtrl.$inject = ['$window', '$rootScope', 'PubSub', '$auth'];
 
-    vm.loginBtnClicked = function(){
-       $log.debug("[NavBarCtrl] -- calling sendNotification")
-       if(!vm.authenticated){
-          sendNotification();
-       }
-    }
+     function NavBarCtrl($window, $rootScope, PubSub, $auth) {
+
+            var vm = this;
+
+            function sendNotification(){
+                PubSub.publish({
+                       type:PubSub.notifyTypes().AUTH_REQUEST, data:null
+                 });
+             }
+
+            vm.linkSelected = function(){
+                //$log.console("[NavBarCtrl]");
+            };
+
+            vm.isAuthenticated = function(){
+                 return $auth.isAuthenticated();
+            };
+
+            vm.logoutBtnClicked = function(){
+                $auth.logout()
+                  .then(function() {
+                          $window.localStorage.currentUser  = undefined;
+                          $rootScope.currentUser = null;
+                      });
+            };
+
+            vm.loginBtnClicked = function(){
+                sendNotification();
+            };
 }
 
 }());

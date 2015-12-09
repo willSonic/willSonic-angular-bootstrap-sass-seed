@@ -15,7 +15,7 @@
    */
 
   angular
-      .module('wsSeed.userModule')
+      .module('wsSeed.user.module')
       .service('UserRemoting', UserRemoting);
 
   UserRemoting.$inject = ['$http'];

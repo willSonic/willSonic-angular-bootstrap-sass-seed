@@ -1,4 +1,6 @@
 (function(){
-    'user strict'
-    angular.module('wsSeed.navbarModule', []);
+    'use strict';
+
+    angular.module('wsSeed.navbar.module', []);
+
 }());

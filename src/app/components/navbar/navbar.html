@@ -1,26 +1,22 @@
 
 <nav class="navbar navbar-default">
   <div class="container">
-      <div class="navbar-header pull-left">
-        <a class="navbar-brand" href="/">WS Angular Seed</a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="#/view1" ng-click="linkSelected()"><i class="fa fa-shield"></i> View 1</a></li>
-        <li><a href="#/view2" ng-click="linkSelected()"><i class="fa fa-comment"></i> View 2</a></li>
-        <li  ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
-        <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
-              <!--<li><a href="#/login">Login</a></li>-->
-             <li><a href="#"  ng-click="vm.loginBtnClicked()">Login </a>
+          <div class="navbar-header pull-left">
+            <a class="navbar-brand" href="/">wsSeeds:>)</a>
+            <ul class="nav navbar-nav">
+                <li><a href="#"><i class="glyphicon glyphicon-home"></i> </a></li>
+                <li><a href="#/view1" ng-click="linkSelected()"><i class="glyphicon glyphicon-dashboard"></i></a></li>
+                <li><a href="#/view2" ng-click="linkSelected()"><i class="glyphicon glyphicon-tasks"></i></a></li>
+                <li  ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
+            </ul>
+         </div>
+        <ul class="nav navbar-nav pull-right">
+             <li ng-if="vm.isAuthenticated()"  ><a href="#"  ng-click="vm.logoutBtnClicked()">Logout <i class="glyphicon glyphicon-log-out"></i></a>
+             <li ng-if="!vm.isAuthenticated()" ><a href="#"  ng-click="vm.loginBtnClicked()">Login <i class="glyphicon glyphicon-log-in"></i></a>
         </ul>
-        <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-             <!--<li><a href="#/logout">Logout</a></li>>-->
-             <li><a href="#"  ng-click="vm.loginBtnClicked()">Logout </a>
-        </ul>
-      </ul>
   </div>
 </nav>
 
-<script type="text/ng-template" id="myModalContent.html">
+<script type="text/ng-template" id="modalContentBase.html">
          <ng-include src="'app/components/user/login/userlogin.html'"></ng-include>
 </script>

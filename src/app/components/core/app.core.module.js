@@ -10,6 +10,5 @@
    * The `wsSeed` module
    */
 
-   angular.module('wsSeed.app.core.module', []);
-
+   angular.module('wsSeed.app.core.module', ['ngRoute']);
 }());
