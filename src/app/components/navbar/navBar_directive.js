@@ -22,11 +22,21 @@
      }
 
 
-     NavBarCtrl.$inject = ['$window', '$rootScope', 'PubSub', '$auth'];
+     NavBarCtrl.$inject = ['$window', '$rootScope', 'PubSub', '$auth', '$route','$location'];
 
-     function NavBarCtrl($window, $rootScope, PubSub, $auth) {
+     function NavBarCtrl($window, $rootScope, PubSub, $auth, $route, $location) {
 
             var vm = this;
+
+            if($route.current && $route.current.name){
+                  vm.viewState = $route.current.name;
+            }
+
+            $rootScope.$on("$routeChangeStart",   function (event, current) {
+                if(current && current.name){
+                 vm.viewState = current.name;
+                }
+            });
 
             function sendNotification(){
                 PubSub.publish({
@@ -34,15 +44,12 @@
                  });
              }
 
-            vm.linkSelected = function(){
-                //$log.console("[NavBarCtrl]");
-            };
-
             vm.isAuthenticated = function(){
                  return $auth.isAuthenticated();
             };
 
             vm.logoutBtnClicked = function(){
+                          $location.path('/');
                 $auth.logout()
                   .then(function() {
                           $window.localStorage.currentUser  = undefined;
@@ -53,6 +60,6 @@
             vm.loginBtnClicked = function(){
                 sendNotification();
             };
-}
+     }
 
 }());
