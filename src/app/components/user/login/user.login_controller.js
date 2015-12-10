@@ -16,22 +16,23 @@
   /* @ngInject */
   function LoginCtrl($uibModalInstance, $auth,$location) {
 
-    var vm = this;
-    vm.modalInstance = $uibModalInstance;
-    vm.login = function() {
-      $auth.login({
-        email: vm.email,
-        password: vm.password
-      })
-      .then(function() {
-            $location.path('/');
-          vm.modalInstance.close();
-      })
-      .catch(function() {
-            $location.path('/');
-          vm.modalInstance.close();
-       });
-    };
+      var vm = this;
+
+      vm.modalInstance = $uibModalInstance;
+      vm.login = function() {
+          $auth.login({
+            email: vm.email,
+            password: vm.password
+          })
+          .then(function() {
+                $location.path('/');
+              vm.modalInstance.close();
+          })
+          .catch(function() {
+                $location.path('/');
+              vm.modalInstance.close();
+           });
+      };
 
 
    /*

@@ -22,37 +22,44 @@
      }
 
 
-     NavBarCtrl.$inject = ['$window', '$rootScope', 'PubSub', '$auth'];
+     NavBarCtrl.$inject = ['$window', '$rootScope', 'PubSub', '$auth','$route'];
 
-     function NavBarCtrl($window, $rootScope, PubSub, $auth) {
+     function NavBarCtrl($window, $rootScope, PubSub, $auth, $route) {
 
-            var vm = this;
+           var vm = this;
 
-            function sendNotification(){
+
+           if($route.current && $route.current.name){
+                 vm.viewState = $route.current.name;
+           }
+
+           $rootScope.$on("$routeChangeStart",   function (event, current) {
+                 if(current && current.name){
+                     vm.viewState = current.name;
+                 }
+           });
+
+           function sendNotification(){
                 PubSub.publish({
                        type:PubSub.notifyTypes().AUTH_REQUEST, data:null
                  });
-             }
+           }
 
-            vm.linkSelected = function(){
-                //$log.console("[NavBarCtrl]");
-            };
-
-            vm.isAuthenticated = function(){
+           vm.isAuthenticated = function(){
                  return $auth.isAuthenticated();
-            };
+           };
 
-            vm.logoutBtnClicked = function(){
+           vm.logoutBtnClicked = function(){
                 $auth.logout()
                   .then(function() {
                           $window.localStorage.currentUser  = undefined;
                           $rootScope.currentUser = null;
                       });
-            };
+           };
 
-            vm.loginBtnClicked = function(){
+           vm.loginBtnClicked = function(){
                 sendNotification();
-            };
-}
+           };
+     }
 
 }());
