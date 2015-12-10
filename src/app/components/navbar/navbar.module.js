@@ -1,6 +1,6 @@
 (function(){
     'use strict';
 
-    angular.module('wsSeed.navbar.module', []);
+    angular.module('wsSeed.navbar.module', ['ngRoute']);
 
 }());

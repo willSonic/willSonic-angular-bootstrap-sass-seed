@@ -8,10 +8,9 @@
   angular.module('wsSeed', [
     'ngRoute',
     'ui.bootstrap',
-    'wsSeed.view1',
-    'wsSeed.view2',
     'wsSeed.version',
     'satellizer',
+    'wsSeed.mainStage.module',
     'wsSeed.app.core.module',
     'wsSeed.navbar.module',
     'wsSeed.user.module'

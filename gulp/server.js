@@ -7,7 +7,6 @@ var nodemon         = require('gulp-nodemon');
 var proxyMiddleware = require('http-proxy-middleware');
 var url             = require('url');
 
-var middleware = require('./proxy');
 
 var util = require('util');
 

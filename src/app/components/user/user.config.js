@@ -13,14 +13,7 @@
    */
 
   angular.module('wsSeed.user.module')
-  .constant( 'routeStates', {
-        profileState: {
-          name: 'profile',
-          url: '/userProfile',
-          template: null,
-          controller: 'ProfileCtrl'
-        }
-      })
+  .constant( 'routeStates', {})
   .config(cfgUserAccountRoute);
    // inject cfgUserAccountRoute dependencies
    cfgUserAccountRoute.$inject = ['$routeProvider', 'routeStates'];
@@ -28,7 +21,6 @@
    // route config function configuring the passed $stateProvider
    function cfgUserAccountRoute($routeProvider, routeStates) {
 
-    $routeProvider.when(routeStates.profileState.url, routeStates.profileState);
 
    }
 

@@ -12,9 +12,9 @@
       .module('wsSeed.user.module')
       .controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$uibModalInstance', '$auth'];
+  LoginCtrl.$inject = ['$uibModalInstance', '$auth', '$location'];
   /* @ngInject */
-  function LoginCtrl($uibModalInstance, $auth) {
+  function LoginCtrl($uibModalInstance, $auth,$location) {
 
     var vm = this;
     vm.modalInstance = $uibModalInstance;
@@ -24,9 +24,11 @@
         password: vm.password
       })
       .then(function() {
+            $location.path('/');
           vm.modalInstance.close();
       })
       .catch(function() {
+            $location.path('/');
           vm.modalInstance.close();
        });
     };
